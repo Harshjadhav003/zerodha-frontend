@@ -1,0 +1,73 @@
+.brokerage-section h1 {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.brokerage-section h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.brokerage-section h4 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.brokerage-section p,
+.brokerage-section li {
+  font-size: 0.80rem;
+  line-height: 1.7;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .brokerage-section h1 {
+    font-size: 2rem;
+  }
+
+  .brokerage-section h3 {
+    font-size: 1.05rem;
+  }
+
+  .brokerage-section p,
+  .brokerage-section li {
+    font-size: 0.9rem;
+  }
+}
+.charges-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.charges-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px; /* space between rows */
+}
+
+.charges-table thead th {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6c757d;
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.charges-table tbody tr {
+  background: #f9f9f9; /* subtle row background */
+  border-radius: 6px;
+}
+
+.charges-table tbody td {
+  padding: 12px 10px;
+  font-size: 0.95rem;
+  color: #424242;
+}
+
+/* subtle horizontal lines */
+.charges-table tbody tr + tr td {
+  border-top: 1px solid #eee;
+}

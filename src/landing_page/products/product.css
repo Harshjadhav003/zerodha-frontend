@@ -1,0 +1,26 @@
+.universe-section {
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.universe-heading {
+  font-size: 2rem;        /* 32px */
+  font-weight: 600;
+}
+
+.universe-subtext {
+  font-size: 1rem;        /* 16px */
+  color: #6c757d;
+}
+
+.universe-logo {
+  height: 50px;
+  object-fit: contain;
+}
+
+.universe-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #6c757d;
+}
