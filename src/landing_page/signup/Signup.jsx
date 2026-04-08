@@ -35,7 +35,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ Validation
+    //  Validation
     if (!email || !password || !username) {
       return handleError("All fields are required");
     }

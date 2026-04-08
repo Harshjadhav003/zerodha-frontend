@@ -49,15 +49,15 @@ const Login = () => {
 
       const { success, message } = data;
 
-      if (success) {
-        handleSuccess(message);
+     if (success) {
+  handleSuccess(message);
 
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      } else {
-        handleError(message);
-      }
+  setTimeout(() => {
+    window.location.href = "http://localhost:5174"; // dashboard
+  }, 1000);
+} else {
+  handleError(message);
+}
 
     } catch (error) {
       console.error(error);

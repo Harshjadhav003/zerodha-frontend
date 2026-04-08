@@ -6,43 +6,57 @@ import { ToastContainer, toast } from "react-toastify";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [cookies, removeCookie] = useCookies([]);
+  const [cookies, , removeCookie] = useCookies(["token"]);
   const [username, setUsername] = useState("");
+
   useEffect(() => {
     const verifyCookie = async () => {
-      if (!cookies.token) {
+      if (!cookies.token) return navigate("/login");
+
+      try {
+        const { data } = await axios.post(
+          "http://localhost:3002",
+          {},
+          { withCredentials: true }
+        );
+
+        if (data.success) {
+          setUsername(data.user);
+          toast.info(`Hello ${data.user}`, { position: "top-right" });
+        } else {
+          removeCookie("token");
+          navigate("/login");
+        }
+      } catch (error) {
+        console.error(error);
+        removeCookie("token");
         navigate("/login");
       }
-      const { data } = await axios.post(
-        "http://localhost:3002",
-        {},
-        { withCredentials: true }
-      );
-      const { success, user } = data;
-      setUsername(user);
-      return success
-        ? toast(`Hello ${user}`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), navigate("/login"));
     };
+
     verifyCookie();
   }, [cookies, navigate, removeCookie]);
-  const Logout = () => {
-    removeCookie("token");
-    navigate("/signup");
+
+  const Logout = async () => {
+    try {
+      await axios.post("http://localhost:3002/logout", {}, { withCredentials: true });
+      removeCookie("token"); // remove cookie client-side
+      navigate("/login"); // redirect to login
+      toast.success("Logged out successfully");
+    } catch (error) {
+      console.error(error);
+      toast.error("Logout failed");
+    }
   };
+
   return (
-    <>
-      <div className="home_page">
-        <h4>
-          {" "}
-          Welcome <span>{username}</span>
-        </h4>
-        <button onClick={Logout}>LOGOUT</button>
-      </div>
+    <div className="home_page">
+      <h4>
+        Welcome <span>{username}</span>
+      </h4>
+      <button onClick={Logout}>LOGOUT</button>
       <ToastContainer />
-    </>
+    </div>
   );
 };
 

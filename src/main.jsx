@@ -15,28 +15,30 @@ import NotFound from "./landing_page/NotFound.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import {default as Login } from"./landing_page/login/login.jsx"
 import {default as Home } from"./landing_page/home/Home.jsx"
+import { CookiesProvider } from "react-cookie";
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-<BrowserRouter>
-  <Navbar />
+    <CookiesProvider>  
+      <BrowserRouter>
+        <Navbar />
 
-  <Routes>
-    <Route path="/" element={<HomePage />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/signup" element={<Signup />} />
-    <Route path="/about" element={<AboutPage />} />
-    <Route path="/pricing" element={<PricingPage />} />
-    <Route path="/products" element={<ProductsPage />} />
-    <Route path="/support" element={<Support_page />} />
-    <Route path="*" element={<NotFound />} />
-  </Routes>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/support" element={<Support_page />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
 
-  <Footer />
-</BrowserRouter>
-</StrictMode>
-)
-
+        <Footer />
+      </BrowserRouter>
+    </CookiesProvider>  
+  </StrictMode>
+);
 
