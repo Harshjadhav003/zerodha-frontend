@@ -46,7 +46,7 @@ function Signup() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3002/signup",
+        "https://docker-setup-backend-latest.onrender.com/signup",
         { email, password, username },
         { withCredentials: true }
       );

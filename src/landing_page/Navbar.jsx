@@ -11,7 +11,7 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:3002/logout",
+        "https://docker-setup-backend-latest.onrender.com/logout",
         {},
         { withCredentials: true }
       );

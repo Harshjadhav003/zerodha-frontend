@@ -15,7 +15,7 @@ const Home = () => {
 
       try {
         const { data } = await axios.post(
-          "http://localhost:3002",
+          "https://docker-setup-backend-latest.onrender.com",
           {},
           { withCredentials: true }
         );
@@ -39,7 +39,7 @@ const Home = () => {
 
   const Logout = async () => {
     try {
-      await axios.post("http://localhost:3002/logout", {}, { withCredentials: true });
+      await axios.post("https://docker-setup-backend-latest.onrender.com/logout", {}, { withCredentials: true });
       removeCookie("token"); // remove cookie client-side
       navigate("/login"); // redirect to login
       toast.success("Logged out successfully");
