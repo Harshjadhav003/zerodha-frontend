@@ -53,7 +53,7 @@ const Login = () => {
   handleSuccess(message);
 
   setTimeout(() => {
-    window.location.href = "http://localhost:5174"; // dashboard
+    window.location.href = "https://zerodha-dashboard-iota.vercel.app"; // dashboard
   }, 1000);
 } else {
   handleError(message);
