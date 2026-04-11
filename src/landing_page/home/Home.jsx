@@ -15,10 +15,10 @@ const Home = () => {
 
       try {
         const { data } = await axios.post(
-          "https://docker-setup-backend-latest.onrender.com",
-          {},
-          { withCredentials: true }
-        );
+              "https://docker-setup-backend-latest.onrender.com/verify",
+               {},
+            { withCredentials: true }
+            );
 
         if (data.success) {
           setUsername(data.user);
