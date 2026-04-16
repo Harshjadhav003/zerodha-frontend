@@ -1,16 +1,63 @@
-# React + Vite
+# 🎨 Zerodha Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> React-based user interface for Zerodha Clone Trading Platform.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+* 🔐 User Authentication (Login/Signup UI)
+* 📊 Dashboard UI
+* 💼 Portfolio & Holdings UI
+* 📈 Charts & Graphs (Recharts / Chart.js)
+* ⚡ API Integration with Backend
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React.js
+* Axios
+* Chart.js / Recharts
+* CSS 
+
+---
+
+## ⚙️ Setup Instructions
+
+```bash
+git clone https://github.com/Harshjadhav003/zerodha-frontend.git
+cd zerodha-frontend
+npm install
+npm start
+```
+
+App runs on:
+👉 http://localhost:5173
+
+---
+
+## 📂 Folder Structure
+
+* `/components` → UI components
+* `/pages` → Screens (Login, Dashboard)
+* `/services` → API calls
+* `/public` → Static assets
+
+---
+
+## 🔗 Connected Services
+
+* Backend API → Handles auth & trading logic
+
+---
+
+## 📌 Notes
+
+* Requires backend server running
+* Uses REST APIs for data
+
+---
+
+👉 Part of Zerodha Microservices Project
+🔗 Main Repo: https://github.com/Harshjadhav003/ZERODHA
