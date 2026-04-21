@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Login = () => {
-  const navigate = useNavigate();
+//  Global axios config (important for cookies)
+axios.defaults.withCredentials = true;
 
-  //  state
+const Login = () => {
+  // state
   const [show, setShow] = useState(false);
   const [inputValue, setInputValue] = useState({
     email: "",
@@ -25,7 +26,7 @@ const Login = () => {
     }));
   };
 
-  // toast
+  // toast helpers
   const handleError = (err) =>
     toast.error(err, { position: "bottom-left" });
 
@@ -41,23 +42,34 @@ const Login = () => {
     }
 
     try {
-      const { data } = await axios.post(
-       "https://docker-setup-backend-latest.onrender.com/login",
-        { email, password },
-        { withCredentials: true }
-      );
-
+     const { data } = await axios.post(
+  `${import.meta.env.VITE_API_URL}/login`,
+  { email, password },
+  { withCredentials: true }
+);
       const { success, message } = data;
 
-     if (success) {
-  handleSuccess(message);
+      if (success) {
+        handleSuccess(message);
 
-  setTimeout(() => {
-    window.location.href = "https://zerodha-dashboard-iota.vercel.app"; // dashboard
-  }, 1000);
-} else {
-  handleError(message);
-}
+        //  reset input
+        setInputValue({ email: "", password: "" });
+
+        //  redirect based on env
+        const dashboardUrl = import.meta.env.VITE_DASHBOARD_URL;
+
+        setTimeout(() => {
+          if (!dashboardUrl) {
+            console.error("VITE_DASHBOARD_URL not defined");
+            return;
+          }
+
+        window.location.replace(import.meta.env.VITE_DASHBOARD_URL);
+        }, 800);
+
+      } else {
+        handleError(message);
+      }
 
     } catch (error) {
       console.error(error);
@@ -65,11 +77,6 @@ const Login = () => {
         error.response?.data?.message || "Server error"
       );
     }
-
-    setInputValue({
-      email: "",
-      password: "",
-    });
   };
 
   return (

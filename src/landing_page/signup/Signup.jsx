@@ -4,6 +4,9 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+//  Global axios config (cookies)
+axios.defaults.withCredentials = true;
+
 function Signup() {
   const navigate = useNavigate();
 
@@ -13,9 +16,11 @@ function Signup() {
     username: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const { email, password, username } = inputValue;
 
-  // Handle input change
+  // Handle input
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setInputValue((prev) => ({
@@ -24,18 +29,17 @@ function Signup() {
     }));
   };
 
-  // Toast helpers
+  // Toasts
   const handleError = (err) =>
     toast.error(err, { position: "bottom-left" });
 
   const handleSuccess = (msg) =>
     toast.success(msg, { position: "bottom-right" });
 
-  // Submit handler
+  // Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //  Validation
     if (!email || !password || !username) {
       return handleError("All fields are required");
     }
@@ -44,11 +48,12 @@ function Signup() {
       return handleError("Password must be at least 6 characters");
     }
 
+    setLoading(true);
+
     try {
       const { data } = await axios.post(
-        "https://docker-setup-backend-latest.onrender.com/signup",
-        { email, password, username },
-        { withCredentials: true }
+        `${import.meta.env.VITE_API_URL}/signup`,
+        { email, password, username }
       );
 
       const { success, message } = data;
@@ -56,26 +61,29 @@ function Signup() {
       if (success) {
         handleSuccess(message);
 
-        // Redirect after success
+        // Reset only on success
+        setInputValue({
+          email: "",
+          password: "",
+          username: "",
+        });
+
+        // Redirect to login
         setTimeout(() => {
           navigate("/");
-        }, 1000);
+        }, 800);
       } else {
         handleError(message);
       }
 
     } catch (error) {
       console.error("SIGNUP ERROR:", error);
-      const errorMessage = error.response?.data?.message || error.message || "Server error. Please try again.";
-      handleError(errorMessage);
+      handleError(
+        error.response?.data?.message || "Server error"
+      );
+    } finally {
+      setLoading(false);
     }
-
-    // Reset form
-    setInputValue({
-      email: "",
-      password: "",
-      username: "",
-    });
   };
 
   return (
@@ -122,8 +130,12 @@ function Signup() {
             />
           </div>
 
-          <button type="submit" className="auth_btn">
-            Signup
+          <button
+            type="submit"
+            className="auth_btn"
+            disabled={loading}
+          >
+            {loading ? "Creating..." : "Signup"}
           </button>
         </form>
 

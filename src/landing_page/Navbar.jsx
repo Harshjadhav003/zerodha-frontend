@@ -1,23 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-function Navbar() {
-  const [cookies, , removeCookie] = useCookies(["token"]);
-  const navigate = useNavigate();
+// global config
+axios.defaults.withCredentials = true;
 
+function Navbar() {
+  const navigate = useNavigate();
+  const [isAuth, setIsAuth] = useState(false);
+
+  // 🔐 Check auth on load
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/verify`
+        );
+
+        setIsAuth(data.success);
+      } catch (error) {
+        setIsAuth(false);
+      }
+    };
+
+    verifyUser();
+  }, []);
+
+  // 🚪 Logout
   const handleLogout = async () => {
     try {
       await axios.post(
-        "https://docker-setup-backend-latest.onrender.com/logout",
-        {},
-        { withCredentials: true }
+        `${import.meta.env.VITE_API_URL}/logout`
       );
-      removeCookie("token");
+
+      setIsAuth(false);
       navigate("/login");
       toast.success("Logged out successfully");
+
     } catch (err) {
       console.error(err);
       toast.error("Logout failed");
@@ -59,8 +79,8 @@ function Navbar() {
               <Link className="nav-link" to="/support">Support</Link>
             </li>
 
-            {/* Conditional rendering */}
-            {!cookies.token ? (
+            {/* 🔐 Auth based UI */}
+            {!isAuth ? (
               <>
                 <li className="nav-item">
                   <Link className="nav-link" to="/signup">Signup</Link>
@@ -71,7 +91,10 @@ function Navbar() {
               </>
             ) : (
               <li className="nav-item">
-                <button className="btn btn-outline-danger ms-2" onClick={handleLogout}>
+                <button
+                  className="btn btn-outline-danger ms-2"
+                  onClick={handleLogout}
+                >
                   Logout
                 </button>
               </li>
