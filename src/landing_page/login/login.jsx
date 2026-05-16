@@ -52,6 +52,11 @@ const Login = () => {
       if (success) {
         handleSuccess(message);
 
+        //  save token to localStorage as fallback for cross-origin/incognito
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+        }
+
         //  reset input
         setInputValue({ email: "", password: "" });
 
@@ -63,8 +68,10 @@ const Login = () => {
             console.error("VITE_DASHBOARD_URL not defined");
             return;
           }
-
-        window.location.replace(import.meta.env.VITE_DASHBOARD_URL);
+          
+          // Pass token in URL for cross-origin localStorage sync (fallback for blocked cookies)
+          const redirectUrl = `${dashboardUrl}?token=${data.token}`;
+          window.location.replace(redirectUrl);
         }, 800);
 
       } else {

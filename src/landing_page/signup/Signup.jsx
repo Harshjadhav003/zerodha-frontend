@@ -61,6 +61,11 @@ function Signup() {
       if (success) {
         handleSuccess(message);
 
+        //  save token to localStorage
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+        }
+
         // Reset only on success
         setInputValue({
           email: "",
