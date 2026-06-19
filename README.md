@@ -1,63 +1,48 @@
 # 🎨 Zerodha Frontend
 
-> React-based user interface for Zerodha Clone Trading Platform.
+A modern React-based frontend for the Zerodha Clone ecosystem, delivering a seamless trading experience with authentication, portfolio management, and responsive user interfaces.
 
----
+🌐 **Live Demo:** [Add Frontend URL]
 
 ## 🚀 Features
 
-* 🔐 User Authentication (Login/Signup UI)
-* 📊 Dashboard UI
-* 💼 Portfolio & Holdings UI
-* 📈 Charts & Graphs (Recharts / Chart.js)
-* ⚡ API Integration with Backend
-
----
+* 🔐 Authentication UI (Login & Signup)
+* 📊 Trading Dashboard
+* 💼 Portfolio & Holdings Management
+* 📈 Interactive Charts & Analytics
+* ⚡ Backend API Integration
+* 📱 Responsive Design
 
 ## 🛠️ Tech Stack
 
 * React.js
 * Axios
-* Chart.js / Recharts
-* CSS 
+* Recharts / Chart.js
+* CSS
 
----
-
-## ⚙️ Setup Instructions
+## ⚙️ Installation
 
 ```bash
 git clone https://github.com/Harshjadhav003/zerodha-frontend.git
 cd zerodha-frontend
 npm install
-npm start
+npm run dev
 ```
 
-App runs on:
-👉 http://localhost:5173
+Application runs on:
 
----
+```bash
+http://localhost:5173
+```
 
-## 📂 Folder Structure
+## 🔗 Related Projects
 
-* `/components` → UI components
-* `/pages` → Screens (Login, Dashboard)
-* `/services` → API calls
-* `/public` → Static assets
+* Backend: https://github.com/Harshjadhav003/zerodha-backend
+* Dashboard: https://github.com/Harshjadhav003/zerodha-dashboard
+* Main Project: https://github.com/Harshjadhav003/ZERODHA
 
----
+## 👨‍💻 Author
 
-## 🔗 Connected Services
+**Harsh Jadhav**
 
-* Backend API → Handles auth & trading logic
-
----
-
-## 📌 Notes
-
-* Requires backend server running
-* Uses REST APIs for data
-
----
-
-👉 Part of Zerodha Microservices Project
-🔗 Main Repo: https://github.com/Harshjadhav003/ZERODHA
+Full Stack Developer | MERN | Docker | System Design
